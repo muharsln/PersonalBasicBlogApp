@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Users\Command\Delete\" />
-    <Folder Include="Features\Users\Command\Update\" />
+    <Folder Include="Features\Categories\Commands\Delete\" />
+    <Folder Include="Features\Categories\Commands\Update\" />
+    <Folder Include="Features\Comment\Commands\Create\" />
+    <Folder Include="Features\Comment\Commands\Delete\" />
+    <Folder Include="Features\Comment\Commands\Update\" />
+    <Folder Include="Features\Posts\Commands\Delete\" />
+    <Folder Include="Features\Posts\Commands\Update\" />
+    <Folder Include="Features\Users\Commands\Delete\" />
+    <Folder Include="Features\Users\Commands\Update\" />
     <Folder Include="Features\Users\Queries\" />
   </ItemGroup>
 

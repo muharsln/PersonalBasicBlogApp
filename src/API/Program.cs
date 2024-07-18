@@ -1,6 +1,6 @@
 using Persistence;
 using Application;
-using Application.Features.Users.Command.Create;
+using Application.Features.Users.Commands.Create;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);

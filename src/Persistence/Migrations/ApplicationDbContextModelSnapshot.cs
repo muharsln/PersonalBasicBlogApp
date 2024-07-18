@@ -22,21 +22,6 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CategoryPost", b =>
-                {
-                    b.Property<Guid>("CategoriesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PostsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CategoriesId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("CategoryPost");
-                });
-
             modelBuilder.Entity("Core.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -131,6 +116,38 @@ namespace Persistence.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Core.Entities.PostCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostCategories");
+                });
+
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -166,27 +183,12 @@ namespace Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CategoryPost", b =>
-                {
-                    b.HasOne("Core.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Core.Entities.Comment", b =>
                 {
                     b.HasOne("Core.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.User", "User")
@@ -205,15 +207,41 @@ namespace Persistence.Migrations
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entities.PostCategory", b =>
+                {
+                    b.HasOne("Core.Entities.Category", "Category")
+                        .WithMany("PostCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Post", "Post")
+                        .WithMany("PostCategories")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Core.Entities.Category", b =>
+                {
+                    b.Navigation("PostCategories");
+                });
+
             modelBuilder.Entity("Core.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("PostCategories");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;
-using Application.Features.Users.Command.Create;
+using MediatR;
+using Application.Services.UserService;
+using Application.Services.PostService;
 
 namespace Application;
 
@@ -9,8 +11,8 @@ public static class ApplicationServicesRegistration
 {
     public static void AddApplicationServices(this IServiceCollection services)
     {
-        //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        //services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -18,5 +20,10 @@ public static class ApplicationServicesRegistration
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+        services.AddScoped<IUserService, UserManager>();
+        services.AddScoped<IPostService, PostManager>();
     }
 }

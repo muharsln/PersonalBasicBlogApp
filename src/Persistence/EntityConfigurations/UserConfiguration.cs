@@ -24,12 +24,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasMany(e => e.Posts)
                .WithOne(p => p.User)
-               .HasForeignKey(p => p.UserId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .HasForeignKey(p => p.UserId);
 
         builder.HasMany(e => e.Comments)
                .WithOne(c => c.User)
-               .HasForeignKey(c => c.UserId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .HasForeignKey(c => c.UserId);
     }
 }

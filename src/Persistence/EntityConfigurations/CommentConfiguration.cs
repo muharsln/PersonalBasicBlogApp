@@ -8,20 +8,19 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.HasKey(c => c.Id);
 
-        builder.HasOne(e => e.User)
-               .WithMany(u => u.Comments)
-               .HasForeignKey(e => e.UserId)
-               .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(e => e.Post)
-               .WithMany(p => p.Comments)
-               .HasForeignKey(e => e.PostId)
-               .OnDelete(DeleteBehavior.Restrict);
-
-        builder.Property(e => e.Text)
+        builder.Property(c => c.Text)
                .IsRequired()
                .HasMaxLength(500);
+
+        builder.HasOne(c => c.Post)
+               .WithMany(p => p.Comments)
+               .HasForeignKey(c => c.PostId);
+
+        builder.HasOne(c => c.User)
+               .WithMany(u => u.Comments)
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
     }
 }

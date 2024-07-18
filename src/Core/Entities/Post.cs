@@ -8,6 +8,6 @@ public class Post:BaseEntity<Guid>
     public string Content { get; set; }
 
     public User User { get; set; }
-    public ICollection<Comment> Comments { get; set; }
-    public ICollection<Category> Categories { get; set; }
+    public ICollection<Comment>? Comments { get; set; }
+    public ICollection<PostCategory>? PostCategories { get; set; }
 }

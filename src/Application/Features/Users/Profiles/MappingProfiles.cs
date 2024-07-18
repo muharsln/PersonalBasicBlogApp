@@ -1,4 +1,4 @@
-﻿using Application.Features.Users.Command.Create;
+﻿using Application.Features.Users.Commands.Create;
 using AutoMapper;
 using Core.Entities;
 
