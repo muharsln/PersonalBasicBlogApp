@@ -18,9 +18,9 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Creat
 
     public async Task<CreatedUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        User user = _mapper.Map<User>(request); // Mapping profilleri oluştur.
-        user.Id = Guid.NewGuid(); // Generate new GUID for user
-        user.CreatedDate = DateTime.Now; // Set created date
+        User user = _mapper.Map<User>(request);
+        user.Id = Guid.NewGuid();
+        user.CreatedDate = DateTime.Now;
 
         User createdUser =  await _userService.AddAsync(user);
 

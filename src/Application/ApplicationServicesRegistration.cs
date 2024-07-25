@@ -12,7 +12,6 @@ public static class ApplicationServicesRegistration
     public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        //services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

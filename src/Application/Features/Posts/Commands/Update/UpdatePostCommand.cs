@@ -1,9 +1,10 @@
 ﻿using MediatR;
 
-namespace Application.Features.Posts.Commands.Create;
+namespace Application.Features.Posts.Commands.Update;
 
-public class CreatePostCommand : IRequest<CreatedPostResponse>
+public class UpdatePostCommand : IRequest<UpdatedPostResponse>
 {
+    public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }

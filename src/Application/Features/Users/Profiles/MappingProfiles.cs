@@ -4,7 +4,7 @@ using Core.Entities;
 
 namespace Application.Features.Users.Profiles;
 
-public class MappingProfiles: Profile
+public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {

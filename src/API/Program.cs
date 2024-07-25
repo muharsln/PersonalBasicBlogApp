@@ -1,7 +1,6 @@
 using Persistence;
 using Application;
-using Application.Features.Users.Commands.Create;
-using MediatR;
+using API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,17 +9,8 @@ builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
-app.MapPost("/api/users", async (CreateUserCommand command, IMediator mediator) =>
-{
-    CreatedUserResponse response = await mediator.Send(command);
-
-    return Results.Created($"/api/users/{response.Id}", response);
-});
-
-//app.MapPost("/api/users", () =>
-//{
-//    return "test";
-//});
+app.MapUserEndpoints();
+app.MapPostEndpoints();
 
 app.UseHttpsRedirection();
 

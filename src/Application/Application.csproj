@@ -9,11 +9,12 @@
   <ItemGroup>
     <Folder Include="Features\Categories\Commands\Delete\" />
     <Folder Include="Features\Categories\Commands\Update\" />
-    <Folder Include="Features\Comment\Commands\Create\" />
-    <Folder Include="Features\Comment\Commands\Delete\" />
-    <Folder Include="Features\Comment\Commands\Update\" />
-    <Folder Include="Features\Posts\Commands\Delete\" />
-    <Folder Include="Features\Posts\Commands\Update\" />
+    <Folder Include="Features\Comments\Commands\Create\" />
+    <Folder Include="Features\Comments\Commands\Delete\" />
+    <Folder Include="Features\Comments\Commands\Update\" />
+    <Folder Include="Features\PostCategories\Commands\Create\" />
+    <Folder Include="Features\PostCategories\Commands\Delete\" />
+    <Folder Include="Features\PostCategories\Commands\Update\" />
     <Folder Include="Features\Users\Commands\Delete\" />
     <Folder Include="Features\Users\Commands\Update\" />
     <Folder Include="Features\Users\Queries\" />

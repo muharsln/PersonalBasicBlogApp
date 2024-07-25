@@ -1,6 +1,6 @@
-﻿namespace Application.Features.Posts.Commands.Create
+﻿namespace Application.Features.Posts.Commands.Create;
+
+public class CreatedPostResponse
 {
-    public class CreatedPostResponse
-    {
-    }
+    public Guid Id { get; set; }
 }
