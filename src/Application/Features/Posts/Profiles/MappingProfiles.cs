@@ -1,6 +1,7 @@
 ﻿using Application.Features.Posts.Commands.Create;
 using Application.Features.Posts.Commands.Delete;
 using Application.Features.Posts.Commands.Update;
+using Application.Features.Posts.Queries.GetList;
 using AutoMapper;
 using Core.Entities;
 
@@ -18,5 +19,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Post, UpdatedPostResponse>().ReverseMap();
         CreateMap<Post, UpdatePostCommand>().ReverseMap();
+
+        CreateMap<Post, GetListPostDto>().ReverseMap();
     }
 }

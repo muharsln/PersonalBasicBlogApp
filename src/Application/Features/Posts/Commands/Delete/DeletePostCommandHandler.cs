@@ -1,4 +1,4 @@
-﻿using Application.Repositories;
+﻿using Application.Services.PostService;
 using AutoMapper;
 using Core.Entities;
 using MediatR;
@@ -7,12 +7,12 @@ namespace Application.Features.Posts.Commands.Delete;
 
 public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, DeletedPostResponse>
 {
-    private readonly IPostRepository _postRepository;
+    private readonly IPostService _postService;
     private readonly IMapper _mapper;
 
-    public DeletePostCommandHandler(IPostRepository postRepository, IMapper mapper)
+    public DeletePostCommandHandler(IPostService postService, IMapper mapper)
     {
-        _postRepository = postRepository;
+        _postService = postService;
         _mapper = mapper;
     }
 
@@ -24,7 +24,7 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Delet
         // PostId'si bu post'a ait olan tüm PostCategory'leri sil.
 
 
-        await _postRepository.DeleteAsync(post);
+        await _postService.DeleteAsync(post);
         DeletedPostResponse response = _mapper.Map<DeletedPostResponse>(post);
 
         return response;

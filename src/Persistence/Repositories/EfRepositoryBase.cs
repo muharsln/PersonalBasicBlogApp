@@ -55,7 +55,9 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
 
     public async Task<ICollection<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default)
     {
-        return await Context.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+        if (predicate != null)
+            return await Context.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+        return await Context.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
